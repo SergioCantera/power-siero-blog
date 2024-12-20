@@ -62,7 +62,7 @@ const featuredPost = await getFeaturedPost()
     defaultMetaImage}>
   <article>
     <section class="border-b pb-8">
-      <h1 class="text-4xl font-bold">
+      <h1 class="text-4xl font-bold" transition:name={`title-${post.title}`}>
         {post.title}
       </h1>
       <div class="my-8"></div>
@@ -102,9 +102,7 @@ const featuredPost = await getFeaturedPost()
           quality={50}
           alt={`Cover image for the blog ${post.title}`}
           class={'my-12 rounded-md shadow-lg'}
-          transition:name={
-            post.title === featuredPost.title ? 'cover image' : 'void'
-          }
+          transition:name={`cover-image-${featuredPost.slug}`}
           transition:persist
         />
       )

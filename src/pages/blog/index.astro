@@ -31,50 +31,50 @@ const tags = featuredPost.metadata.tags
 <Layout title="Blog">
   <h1 class="text-4xl font-bold">Blog Posts</h1>
   <div class="my-6"></div>
-  <section class="rounded-md bg-white">
-    <a
-      href={`blog/${featuredPost.slug}`}
-      class="transition-opacity hover:opacity-80">
-      {
-        featuredPost.metadata.cover_image && (
-          <Image
-            src={`${featuredPost.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
-            format="webp"
-            width={1200}
-            height={575}
-            alt="Featured Blog Post"
-            class={'rounded-t-md'}
-            loading="eager"
-            transition:name="cover image"
-          />
-        )
-      }
-      <div
-        class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
-        <h2 class="text-3xl font-semibold">{featuredPost.title}</h2>
-        <p class="text-lg">{featuredPost.metadata.excerpt}</p>
+  <div class="flex flex-row gap-3">
+    <section class="rounded-md bg-white">
+      <a
+        href={`blog/${featuredPost.slug}`}
+        class="transition-opacity hover:opacity-80">
         {
-          tags && (
-            <div class="flex flex-wrap gap-1">
-              {tags?.map(
-                (tag: { title: string; metadata: { color?: string } }) => (
-                  <span
-                    class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
-                    style={`background-color: ${tag.metadata.color}`}>
-                    {tag.title}
-                  </span>
-                )
-              )}
-            </div>
+          featuredPost.metadata.cover_image && (
+            <Image
+              src={`${featuredPost.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
+              format="webp"
+              width={1200}
+              height={575}
+              alt="Featured Blog Post"
+              class={'rounded-t-md'}
+              loading="eager"
+              transition:name={`cover-image-${featuredPost.slug}`}
+            />
           )
         }
-      </div>
-    </a>
-  </section>
-  <div class="my-6"></div>
-  <ul class="grid gap-8 md:grid-cols-2">
-    {
-      data
+        <div
+          class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
+          <h2 class="text-3xl font-semibold" transition:name={`title-${featuredPost.title}`}>{featuredPost.title}</h2>
+          <p class="text-lg">{featuredPost.metadata.excerpt}</p>
+          {
+            tags && (
+              <div class="flex flex-wrap gap-1">
+                {tags?.map(
+                  (tag: { title: string; metadata: { color?: string } }) => (
+                    <span
+                      class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
+                      style={`background-color: ${tag.metadata.color}`}>
+                      {tag.title}
+                    </span>
+                  )
+                )}
+              </div>
+            )
+          }
+        </div>
+      </a>
+    </section>
+    <ul class="grid gap-3 md:grid-cols-1">
+      {
+        data
         .filter((post: Props) => post.title !== featuredPost.title)
         .map((post: Props) => (
           <Card
@@ -85,5 +85,6 @@ const tags = featuredPost.metadata.tags
           />
         ))
     }
-  </ul>
+    </ul>
+  </div>
 </Layout>
