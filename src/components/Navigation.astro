@@ -1,7 +1,7 @@
 ---
-import HomeIcon from './HomeIcon.astro'
-import BlogIcon from './BlogIcon.astro'
-import AboutIcon from './AboutIcon.astro'
+import HomeIcon from './icons/HomeIcon.astro'
+import BlogIcon from './icons/BlogIcon.astro'
+import EventIcon from './icons/EventIcon.astro'
 ---
 
 <nav
@@ -10,21 +10,22 @@ import AboutIcon from './AboutIcon.astro'
     href="/"
     class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
     ><span class="flex items-center gap-x-1">
-      <HomeIcon />Home</span
+      <HomeIcon />Inicio</span
     >
   </a>
-  <a
-    href="/about"
-    class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
-    ><span class="flex items-center gap-x-1">
-      <AboutIcon/>About me</span
-    >
-  </a>
+  
   <a
     href="/blog"
     class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
     ><span class="flex items-center gap-x-1"
       ><BlogIcon/>Blog
     </span>
+  </a>
+  <a
+    href="/events"
+    class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
+    ><span class="flex items-center gap-x-1">
+      <EventIcon/>Eventos</span
+    >
   </a>
 </nav>

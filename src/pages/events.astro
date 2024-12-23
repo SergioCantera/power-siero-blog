@@ -1,0 +1,40 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { getSessions, getEvents } from '../lib/cosmic'
+
+const sessions = await getSessions()
+
+export interface Session {
+  title: string
+  slug: string
+  metadata: {
+    description: string
+    events: {
+      title: string
+      metadata: {
+        start_date: string
+        end_date: string
+      }
+    }[]
+  }
+}
+---
+<Layout>
+  <div>
+  {sessions.map((session:Session) => (
+    <div>
+      <h2>{session.title}</h2>
+      <ul>
+        {session.metadata.events.map((event) => (
+          <li>
+            <h3>{event.title}</h3>
+            <p>{event.metadata.start_date} - {event.metadata.end_date}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div> 
+
+
+</Layout>

@@ -1,9 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Card from '../components/Card.astro'
-import { getAllPosts } from '../lib/cosmic'
+import Layout from '@layouts/Layout.astro'
+import Card from '@components/Card.astro'
+import SocialPill from '@components/SocialPill.astro'
+import { getAllPosts, getCertifications, getFeaturedPost } from '../lib/cosmic'
+import BentoGrid from '@components/BentoGrid.astro'
+import {Image} from 'astro:assets'
+import LinkedInIcon from '@components/icons/LinkedIn.astro'
+import GitHubIcon from '@components/icons/GitHub.astro'
+import MailIcon from '@components/icons/Mail.astro'
 
 const data = await getAllPosts()
+const featuredPost = await getFeaturedPost()
+const certifications = await getCertifications()
+const tags = featuredPost.metadata.tags
 
 export interface Post {
   title: string
@@ -18,19 +27,85 @@ export interface Post {
     }[]
   }
 }
+
+export interface Certification {
+  title:string
+  slug:string
+  metadata:{
+    badge: {
+      url: string
+      imgix_url: string
+    }
+    expiration_date?: string
+  }
+}
 ---
 
 <Layout>
-  <h1 class="text-4xl font-bold">
+  <section class="w-full flex flex-col space-y-3 mt-12">
+    <img
+    src="https://avatars.githubusercontent.com/u/39066319?v=4"
+    alt="Sergio García foto"
+    class="rounded-full h-14 w-14 mb-2"
+  />
+    <h1 class="text-4xl font-bold">Hey, soy <span
+      class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
+      >Sergio García</span></h1>
+    <h2 class="text-xl">
+      Soy desarrollador y arquitecto de <span class="font-bold">Microsoft Power Platform</span>. De Pola de Siero, <span class="font-semibold text-sky-400">Asturias</span> 🇪🇸. Me encanta compartir
+      conocimiento con la comunidad y aprender cosas nuevas. En este blog podrás encontrar tutoriales
+      sobre desarrollo en Power Pages, Power Apps y mucho más.</h2>
+      <nav class="flex gap-x-4">
+        <SocialPill href="https://www.linkedin.com/in/sergio-garc%C3%ADa-fonseca/">  
+          <LinkedInIcon class="w-6 h-6"/>
+          LinkedIn
+        </SocialPill>
+        <SocialPill href="https://github.com/SergioCantera">
+          <GitHubIcon class="w-6 h-6"/>
+          GitHub
+        </SocialPill>
+        <SocialPill href="mailto:sgfcantera@hotmail.com">
+          <MailIcon class="w-6 h-6"/>
+          sgfcantera@hotmail.com
+        </SocialPill>
+      </nav>
+  </section>
+  <div class="my-6"></div>
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold mb-2">
+      <span
+        class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
+        >Certificaciones y logros</span
+      >
+    </h2>
+    <div class="grid grid-cols-2 max-w-4xl gap-2">
+    {
+      certifications.map((certification:Certification) => (
+        <div class="flex flex-row items-center space-x-2 border-2 border-sky-400 px-4 py-2 rounded-full">
+          <Image
+              src={`${certification.metadata.badge.imgix_url}?w=1200&auto=format,compression`}
+              format="svg"
+              width={42}
+              height={42}
+              alt={`badge-${certification.slug}`}
+              loading="eager"
+            />
+          <span class="text-base text-wrap font-semibold">{certification.title}</span>
+        </div>
+      ))
+    }
+    </div>
+
+  </section>
+  <h1 class="text-4xl font-bold mb-6">
     <span
       class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
       >Power Siero</span
     > Blog
   </h1>
-  <div class="my-6"></div>
-  <h3 class="mb-4 text-2xl font-bold">Blog Posts</h3>
-  <section>
-    <ul class="grid gap-8 md:grid-cols-2">
+  <section class="mb-6">
+    {data.length < 6 ? 
+    <ul class="grid gap-2 md:grid-cols-6">
       {
         data.map((post: Post) => (
           <Card
@@ -41,12 +116,13 @@ export interface Post {
           />
         ))
       }
-    </ul>
+    </ul> : 
+      <BentoGrid data={data} featuredPost={featuredPost}/>
+    }
   </section>
-  <div class="my-12"></div>
   <a
     href="/blog"
     class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
-    >Blog page</a
+    >Descubre más artículos</a
   >
 </Layout>

@@ -31,27 +31,27 @@ const tags = featuredPost.metadata.tags
 <Layout title="Blog">
   <h1 class="text-4xl font-bold">Blog Posts</h1>
   <div class="my-6"></div>
-  <div class="flex flex-row gap-3">
-    <section class="rounded-md bg-white">
+  <div class="flex flex-col gap-3">
+    <section class="rounded-md bg-white mb-2">
       <a
         href={`blog/${featuredPost.slug}`}
-        class="transition-opacity hover:opacity-80">
+        class="transition-opacity hover:opacity-80 flex flex-row">
         {
           featuredPost.metadata.cover_image && (
             <Image
               src={`${featuredPost.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
               format="webp"
-              width={1200}
-              height={575}
+              width={600}
+              height={300}
               alt="Featured Blog Post"
-              class={'rounded-t-md'}
+              class={'rounded-l-md'}
               loading="eager"
               transition:name={`cover-image-${featuredPost.slug}`}
             />
           )
         }
         <div
-          class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
+          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
           <h2 class="text-3xl font-semibold" transition:name={`title-${featuredPost.title}`}>{featuredPost.title}</h2>
           <p class="text-lg">{featuredPost.metadata.excerpt}</p>
           {
@@ -77,12 +77,46 @@ const tags = featuredPost.metadata.tags
         data
         .filter((post: Props) => post.title !== featuredPost.title)
         .map((post: Props) => (
-          <Card
-            title={post.title}
-            href={post.slug}
-            body={post.metadata.excerpt}
-            tags={post.metadata.tags.map((tag) => tag)}
-          />
+        <section class="rounded-md bg-white mb-2">
+      <a
+        href={`blog/${post.slug}`}
+        class="transition-opacity hover:opacity-80 flex flex-row">
+        {
+          post.metadata.cover_image && (
+            <Image
+              src={`${post.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
+              format="webp"
+              width={600}
+              height={300}
+              alt={`Blog post - ${post.title}`}
+              class={'rounded-l-md'}
+              loading="eager"
+              transition:name={`cover-image-${post.slug}`}
+            />
+          )
+        }
+        <div
+          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
+          <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
+          <p class="text-lg">{post.metadata.excerpt}</p>
+          {
+            tags && (
+              <div class="flex flex-wrap gap-1">
+                {tags?.map(
+                  (tag: { title: string; metadata: { color?: string } }) => (
+                    <span
+                      class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
+                      style={`background-color: ${tag.metadata.color}`}>
+                      {tag.title}
+                    </span>
+                  )
+                )}
+              </div>
+            )
+          }
+        </div>
+      </a>
+    </section>
         ))
     }
     </ul>

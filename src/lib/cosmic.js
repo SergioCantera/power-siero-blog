@@ -37,3 +37,33 @@ export async function getConfig() {
     .depth(1)
   return data.object
 }
+
+export async function getCertifications() {
+  const data = await cosmic.objects
+    .find({
+      type: 'certifications'
+    })
+    .props('title,slug,metadata')
+    .depth(2)
+  return data.objects
+}
+
+export async function getSessions() {
+  const data = await cosmic.objects
+    .find({
+      type: 'sessions'
+    })
+    .props('title,slug,metadata')
+    .depth(2)
+  return data.objects
+}
+
+export async function getEvents() {
+  const data = await cosmic.objects
+    .find({
+      type: 'events'
+    })
+    .props('title,slug,metadata')
+    .depth(2)
+  return data.objects
+}
