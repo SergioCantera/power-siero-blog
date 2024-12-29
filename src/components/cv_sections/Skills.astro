@@ -1,0 +1,73 @@
+---
+import { getCV } from "@lib/cosmic"
+
+import Section from "@components/cv_sections/CVSection.astro"
+import HTML from "@components/icons/Html.astro"
+import CSS from "@components/icons/Css.astro"
+import JavaScript from "@components/icons/Javascript.astro"
+import TypeScript from "@components/icons/Typescript.astro"
+import React from "@components/icons/React.astro"
+import Node from "@components/icons/Node.astro"
+import Git from "@components/icons/Git.astro"
+import GitHub from "@components/icons/GithubSkill.astro"
+import Tailwind from "@components/icons/Tailwind.astro"
+import Next from "@components/icons/Next.astro"
+
+export interface Skills {
+  name: string
+  level: string
+  keywords: string[]
+}
+
+const { skills } = await getCV()
+
+const SKILLS_ICONS: Record<string, any> = {
+  HTML,
+  CSS,
+  JavaScript,
+  TypeScript,
+  React,
+  Node,
+  Git,
+  GitHub,
+  Next,
+  Tailwind,
+}
+---
+
+<Section title="Skills">
+  <ul>
+    {
+      skills.map(({ name }:Skills) => {
+        const iconName = name === "Next.js" ? "Next" : name
+        const Icon = SKILLS_ICONS[iconName]
+
+        return (
+          <li>
+            {Icon && <Icon />} <span>{name}</span>
+          </li>
+        )
+      })
+    }
+  </ul>
+</Section>
+
+<style>
+  ul {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  li {
+    align-items: center;
+    background: #eee;
+    border-radius: 6px;
+    color: black;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 500;
+    gap: 4px;
+    padding: 0.2rem 0.6rem;
+  }
+</style>

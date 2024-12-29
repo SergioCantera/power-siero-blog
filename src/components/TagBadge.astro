@@ -1,0 +1,15 @@
+---
+const tag= Astro.props
+
+let tagClass = "bg-black"
+if (Astro.props.class){
+  tagClass = Astro.props.class
+}
+---
+<a href={`/blog/tag/${tag.slug}`} class="hover:scale-105 transition">
+  <span
+    class=`w-fit whitespace-nowrap rounded-md px-2 py-1 text-sm font-bold text-white shadow hover:scale-110 transition ${tagClass}`
+    style={`background-color: ${tag.metadata?.color}`}>
+      {tag.title}
+  </span>
+</a>

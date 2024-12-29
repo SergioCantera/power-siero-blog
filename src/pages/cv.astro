@@ -1,0 +1,67 @@
+---
+import LayoutCV from "@layouts/LayoutCV.astro"
+
+import About from "@components/cv_sections/About.astro"
+import Education from "@components/cv_sections/Education.astro"
+import Experience from "@components/cv_sections/Experience.astro"
+import Hero from "@components/cv_sections/Hero.astro"
+import Certifications from "@components/cv_sections/Certifications.astro"
+import Skills from "@components/cv_sections/Skills.astro"
+import KeyboardManager from "@components/cv_sections/KeyboardManager.astro"
+import { getCV } from '@lib/cosmic'
+
+interface Props {
+  metadata:{
+    basics: {
+      mane: string
+      label: string
+      image: string
+	    email: string
+	    summary: string
+      location: {
+		    address: string
+		    postalCode: string
+		    city: string
+		    countryCode: string
+		    region: string
+	      }
+	    profiles:
+		  {
+         network: string
+          username: string
+          url: string
+      }[]
+		}
+  }
+}
+
+const {basics} = await getCV()
+
+---
+
+<LayoutCV title={`Portafolio de ${basics.name} - ${basics.label}`}>
+  <main>
+    <Hero />
+    <About />
+    <Experience />
+    <Education />
+    <Certifications />
+    <Skills />
+  </main>
+
+  <KeyboardManager />
+</LayoutCV>
+
+<style>
+  main {
+    padding: 4rem;
+    margin: auto;
+    width: 100%;
+  }
+
+  @media (width <= 700px) {
+    main {
+      padding: 2rem;
+    }
+  }
+</style>

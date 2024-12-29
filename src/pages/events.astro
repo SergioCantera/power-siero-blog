@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro'
-import { getSessions, getEvents } from '../lib/cosmic'
+import SessionItem from '@components/SessionItem.astro'
+import { getSessions } from '../lib/cosmic'
 
 const sessions = await getSessions()
 
@@ -9,6 +10,7 @@ export interface Session {
   slug: string
   metadata: {
     description: string
+    url: string
     events: {
       title: string
       metadata: {
@@ -19,22 +21,69 @@ export interface Session {
   }
 }
 ---
-<Layout>
-  <div>
-  {sessions.map((session:Session) => (
-    <div>
-      <h2>{session.title}</h2>
-      <ul>
-        {session.metadata.events.map((event) => (
-          <li>
-            <h3>{event.title}</h3>
-            <p>{event.metadata.start_date} - {event.metadata.end_date}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  ))}
-</div> 
-
-
+<Layout title="Events">
+    <section class="flex flex-col">
+      <div>
+        <h2 class="text-4xl font-bold text-center">Sessions & talks</h2>
+        <div class="mysessions-grid">
+          {sessions.map((session:Session, index:number) => {
+            if (index % 2 === 0) {
+              return(
+                <>
+                  <SessionItem {...session} key={session.slug} class="text-right" />
+                  <div class="line"></div>
+                  <div class="empty"></div>
+                </>
+              )
+            }
+            return(
+              <>
+                <div class="empty"></div>
+                <div class="line"></div>
+                <SessionItem {...session} key={session.slug}/>
+              </>
+            )
+          })}
+        </div>
+      </div>
+    </section>
 </Layout>
+<style>
+ .mysessions-grid {
+  display: grid;
+  grid-template-columns: auto 2px auto;
+  gap: 20px 40px;
+  padding: 40px;
+  justify-content: center;
+  max-width: 1024px;
+  margin: 1rem auto;
+ }
+  .empty{
+
+  }
+  .line {
+      background-color: #4f39fa;
+      position: relative;
+   }
+   .line::before,
+   .line::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-color: #4f39fa;
+      border-radius: 50%;
+      position: absolute;
+      top: -20px;
+      left: -9px
+   }
+
+   .line::after {
+      top: 100%;
+      z-index: 1;
+   }
+
+   .session_left {
+      text-align: right;
+   }
+</style>

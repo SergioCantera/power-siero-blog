@@ -1,5 +1,6 @@
 ---
 import {Image} from 'astro:assets'
+import TagBadge from './TagBadge.astro'
 export interface Post {
   title: string
   slug: string
@@ -36,24 +37,20 @@ const featuredClass = postLength < 9
     data.map((post: Post) => (
         post.slug !== featuredPost.slug ?
         <li class="rounded-md bg-white shadow-md transition hover:shadow-xl md:col-span-2">
-            <a href={`/blog/${post.slug}`}>
-              <div class="flex h-full flex-col gap-y-2 p-6">
-                <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${post.title}`}>
-                  {post.title}
-                </h2>
-                <p>
-                  {post.metadata.excerpt}
-                </p>
+          <a href={`/blog/${post.slug}`}>
+          <div class="flex h-full flex-col gap-y-2 p-6">
+              <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${post.title}`}>
+                {post.title}
+              </h2>
+              <p>
+                {post.metadata.excerpt}
+              </p>
                 {
                   post.metadata.tags && (
                     <div class="flex flex-wrap gap-1">
                       {post.metadata.tags?.map(
                         (tag: { title: string; metadata: { color?: string } }) => (
-                          <span
-                            class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
-                            style={`background-color: ${tag.metadata?.color}`}>
-                            {tag.title}
-                          </span>
+                          <TagBadge {...tag} key={tag.title} />
                         )
                       )}
                     </div>
@@ -85,16 +82,13 @@ const featuredClass = postLength < 9
               class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
               <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
               <p class="text-lg">{post.metadata.excerpt}</p>
+            
               {
                 post.metadata.tags && (
                   <div class="flex flex-wrap gap-1">
                     {post.metadata.tags?.map(
                       (tag: { title: string; metadata: { color?: string } }) => (
-                        <span
-                          class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
-                          style={`background-color: ${tag.metadata.color}`}>
-                          {tag.title}
-                        </span>
+                        <TagBadge {...tag} key={tag.title} />
                       )
                     )}
                   </div>

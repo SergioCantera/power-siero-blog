@@ -1,0 +1,62 @@
+---
+import { getCertifications } from "@lib/cosmic"
+import {Image} from "astro:assets"
+import Section from "@components/cv_sections/CVSection.astro"
+
+export interface Certification {
+  title:string
+  slug:string
+  metadata:{
+    badge: {
+      url: string
+      imgix_url: string
+    }
+    expiration_date?: string
+  }
+}
+
+const certifications = await getCertifications()
+
+
+---
+
+<Section title="Certifications">
+  <ul class="flex flex-wrap gap-1">
+    {
+      certifications.map(({ title, metadata }:Certification) => {
+        return (
+          <li>
+            {metadata.badge && <Image
+              src={`${metadata.badge.imgix_url}?w=1200&auto=format,compression`}
+              format="svg"
+              width={18}
+              height={18}
+              alt={`badge-${title}`}
+              loading="eager"
+            />} <span>{title}</span>
+          </li>
+        )
+      })
+    }
+  </ul>
+</Section>
+
+<style>
+  ul {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  li {
+    align-items: center;
+    background: #eee;
+    border-radius: 6px;
+    color: black;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 500;
+    gap: 4px;
+    padding: 0.2rem 0.6rem;
+  }
+</style>

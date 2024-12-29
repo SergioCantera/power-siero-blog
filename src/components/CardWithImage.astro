@@ -1,9 +1,17 @@
 ---
 import TagBadge from '@components/TagBadge.astro'
+import { Image } from 'astro:assets'
 export interface Props {
   title: string
+  slug:string
   body: string
   href: string
+  metadata: {
+    cover_image?: {
+      url: string
+      imgix_url: string
+    }
+  }
   tags: {
     title: string
     metadata: {
@@ -12,12 +20,27 @@ export interface Props {
   }[]
 }
 
-const { href, title, body, tags } = Astro.props
+const { href, title,slug, body, metadata, tags } = Astro.props
 ---
 
 <li class="rounded-md bg-white shadow-md transition hover:shadow-xl">
   <a href={`/blog/${href}`}>
-    <div class="flex h-full flex-col gap-y-2 p-6">
+    <div class="flex h-full w-full flex-col gap-y-2">
+      {
+        metadata.cover_image && (
+          <Image
+            src={`${metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
+            format="webp"
+            width={600}
+            height={300}
+            alt="Featured Blog Post"
+            class={'rounded-t-md object-cover'}
+            loading="eager"
+            transition:name={`cover-image-${slug}`}
+          />
+        )
+      }
+      <div class="flex h-full flex-col gap-y-2 p-6">
       <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${title}`}>
         {title}
       </h2>
@@ -35,6 +58,7 @@ const { href, title, body, tags } = Astro.props
           </div>
         )
       }
+      </div>
     </div>
   </a>
 </li>

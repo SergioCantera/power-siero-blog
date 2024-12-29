@@ -1,0 +1,13 @@
+---
+import { getCV } from '@lib/cosmic'
+
+import Section from "@components/cv_sections/CVSection.astro"
+const {basics} = await getCV()
+const { summary } = basics
+---
+
+<Section title="About me">
+  <p>
+    {summary}
+  </p>
+</Section>

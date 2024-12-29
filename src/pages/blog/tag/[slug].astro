@@ -1,0 +1,80 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { getSelectedTag,getPostsByTag,getAllTags } from '@lib/cosmic'
+import { Image } from 'astro:assets'
+import CardWithImage from '@components/CardWithImage.astro'
+import TagBadge from '@components/TagBadge.astro'
+
+interface Props {
+  id:string
+  title:string
+  slug: string
+  metadata: {
+    color?: string
+  }
+}
+
+interface Post {
+  title: string
+  slug: string
+  metadata: {
+    excerpt: string
+    tags: {
+      title: string
+      slug: string
+      metadata: {
+        color?: string
+      }
+    }[]
+    cover_image?: {
+      url: string
+      imgix_url: string
+    }
+  }
+}
+export async function getStaticPaths(){
+  const data = await getAllTags()
+  return data.map((tag:Props) => {
+    return {
+      params: { slug: tag.slug },
+      props: {title:tag.title, slug:tag.slug}}
+  })
+}
+
+const {slug,title} = Astro.props
+const tag = await getSelectedTag(slug)
+const data:Post[] = await getPostsByTag(tag.id)
+const tags:Props[] = await getAllTags()
+---
+
+<Layout title="Blog">
+  <h1 class="text-4xl font-bold">Blog Posts for <span class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent">{title}</span> tag</h1>
+  <nav class="flex flex-wrap gap-2 mt-2">
+    {tags.map((tag) => {
+      if(tag.slug === slug){
+        return <TagBadge {...tag} key={tag.title} class="bg-[#da62c4]" />
+      } 
+      
+      return <TagBadge {...tag} key={tag.title} />
+    })
+    }
+  </nav>
+  <div class="my-6"></div>
+  <div class="flex flex-col gap-3">
+    <ul class="grid gap-3 md:grid-cols-2">
+      {
+        data
+        .map((post:Post) => (
+          <CardWithImage
+            title={post.title}
+            slug={post.slug}
+            href={post.slug}
+            body={post.metadata.excerpt}
+            tags={post.metadata.tags.map((tag) => tag)}
+            metadata={post.metadata}
+          />
+        ))
+    }
+    </ul>
+  </div>
+</Layout>

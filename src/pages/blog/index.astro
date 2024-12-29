@@ -1,9 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import Card from '../../components/Card.astro'
-import { getAllPosts } from '../../lib/cosmic'
+import Layout from '@layouts/Layout.astro'
+import { getAllPosts } from '@lib/cosmic'
 import { Image } from 'astro:assets'
-import { getFeaturedPost } from '../../lib/cosmic'
+import { getFeaturedPost } from '@lib/cosmic'
+import TagBadge from '@components/TagBadge.astro'
 
 interface Props {
   title: string
@@ -32,7 +32,7 @@ const tags = featuredPost.metadata.tags
   <h1 class="text-4xl font-bold">Blog Posts</h1>
   <div class="my-6"></div>
   <div class="flex flex-col gap-3">
-    <section class="rounded-md bg-white mb-2">
+    <section class="flex rounded-md bg-white mb-2">
       <a
         href={`blog/${featuredPost.slug}`}
         class="transition-opacity hover:opacity-80 flex flex-row">
@@ -41,7 +41,7 @@ const tags = featuredPost.metadata.tags
             <Image
               src={`${featuredPost.metadata.cover_image.imgix_url}?w=1200&auto=format,compression`}
               format="webp"
-              width={600}
+              width={580}
               height={300}
               alt="Featured Blog Post"
               class={'rounded-l-md'}
@@ -52,18 +52,16 @@ const tags = featuredPost.metadata.tags
         }
         <div
           class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
-          <h2 class="text-3xl font-semibold" transition:name={`title-${featuredPost.title}`}>{featuredPost.title}</h2>
-          <p class="text-lg">{featuredPost.metadata.excerpt}</p>
+          <div>
+            <h2 class="text-3xl font-semibold" transition:name={`title-${featuredPost.title}`}>{featuredPost.title}</h2>
+            <p class="text-lg">{featuredPost.metadata.excerpt}</p>
+          </div>
           {
             tags && (
               <div class="flex flex-wrap gap-1">
                 {tags?.map(
                   (tag: { title: string; metadata: { color?: string } }) => (
-                    <span
-                      class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
-                      style={`background-color: ${tag.metadata.color}`}>
-                      {tag.title}
-                    </span>
+                    <TagBadge {...tag} key={tag.title} />
                   )
                 )}
               </div>
@@ -72,7 +70,7 @@ const tags = featuredPost.metadata.tags
         </div>
       </a>
     </section>
-    <ul class="grid gap-3 md:grid-cols-1">
+    <ul class="grid gap-3 md:grid-cols-2">
       {
         data
         .filter((post: Props) => post.title !== featuredPost.title)
@@ -97,18 +95,16 @@ const tags = featuredPost.metadata.tags
         }
         <div
           class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
-          <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
-          <p class="text-lg">{post.metadata.excerpt}</p>
+          <div>
+            <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
+            <p class="text-lg">{post.metadata.excerpt}</p>
+          </div>
           {
             tags && (
               <div class="flex flex-wrap gap-1">
                 {tags?.map(
                   (tag: { title: string; metadata: { color?: string } }) => (
-                    <span
-                      class="w-fit whitespace-nowrap rounded-md bg-black px-2 text-sm font-bold text-white shadow transition"
-                      style={`background-color: ${tag.metadata.color}`}>
-                      {tag.title}
-                    </span>
+                    <TagBadge {...tag} key={tag.title} />
                   )
                 )}
               </div>

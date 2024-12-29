@@ -7,6 +7,7 @@ import BentoGrid from '@components/BentoGrid.astro'
 import {Image} from 'astro:assets'
 import LinkedInIcon from '@components/icons/LinkedIn.astro'
 import GitHubIcon from '@components/icons/GitHub.astro'
+import SessionizeIcon from '@components/icons/Sessionize.astro'
 import MailIcon from '@components/icons/Mail.astro'
 
 const data = await getAllPosts()
@@ -41,20 +42,19 @@ export interface Certification {
 }
 ---
 
-<Layout>
-  <section class="w-full flex flex-col space-y-3 mt-12">
+<Layout title="Power Siero website">
+  <section class="w-full flex flex-col space-y-3 mt-12 mb-12">
     <img
     src="https://avatars.githubusercontent.com/u/39066319?v=4"
     alt="Sergio García foto"
     class="rounded-full h-14 w-14 mb-2"
   />
-    <h1 class="text-4xl font-bold">Hey, soy <span
+    <h1 class="text-4xl font-bold">Hey, I'm <span
       class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
       >Sergio García</span></h1>
-    <h2 class="text-xl">
-      Soy desarrollador y arquitecto de <span class="font-bold">Microsoft Power Platform</span>. De Pola de Siero, <span class="font-semibold text-sky-400">Asturias</span> 🇪🇸. Me encanta compartir
-      conocimiento con la comunidad y aprender cosas nuevas. En este blog podrás encontrar tutoriales
-      sobre desarrollo en Power Pages, Power Apps y mucho más.</h2>
+    <h2 class="text-xl text-pretty">
+      I'm a <span class="font-bold">Microsoft Power Platform</span> developer and architect. From Pola de Siero, <span class="font-semibold text-sky-400">Asturias</span> 🇪🇸. I love sharing my knowledge with the community and learning new things. In this blog you can find tutorials and interesting posts about
+      development in Power Pages, Power Apps and much more.</h2>
       <nav class="flex gap-x-4">
         <SocialPill href="https://www.linkedin.com/in/sergio-garc%C3%ADa-fonseca/">  
           <LinkedInIcon class="w-6 h-6"/>
@@ -64,18 +64,26 @@ export interface Certification {
           <GitHubIcon class="w-6 h-6"/>
           GitHub
         </SocialPill>
+        <SocialPill href="https://sessionize.com/sergio-garcia-fonseca/">
+          <SessionizeIcon class="w-6 h-6"/>
+          Sessionize
+        </SocialPill>
         <SocialPill href="mailto:sgfcantera@hotmail.com">
           <MailIcon class="w-6 h-6"/>
           sgfcantera@hotmail.com
         </SocialPill>
       </nav>
   </section>
-  <div class="my-6"></div>
-  <section class="mb-12">
+  <a
+    href="/cv"
+    class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
+    >View CV</a
+  >
+  <section class="mt-12 mb-12">
     <h2 class="text-2xl font-bold mb-2">
       <span
         class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
-        >Certificaciones y logros</span
+        >Certifications & badges</span
       >
     </h2>
     <div class="grid grid-cols-2 max-w-4xl gap-2">
@@ -95,15 +103,14 @@ export interface Certification {
       ))
     }
     </div>
-
   </section>
-  <h1 class="text-4xl font-bold mb-6">
-    <span
-      class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
-      >Power Siero</span
-    > Blog
-  </h1>
-  <section class="mb-6">
+  <section class="mt-12 mb-6">
+    <h1 class="text-4xl font-bold mb-6">
+      <span
+        class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
+        >Power Siero</span
+      > Blog
+    </h1>
     {data.length < 6 ? 
     <ul class="grid gap-2 md:grid-cols-6">
       {
@@ -123,6 +130,6 @@ export interface Certification {
   <a
     href="/blog"
     class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
-    >Descubre más artículos</a
+    >More articles</a
   >
 </Layout>
