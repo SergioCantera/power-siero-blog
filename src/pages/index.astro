@@ -51,11 +51,15 @@ export interface Certification {
   />
     <h1 class="text-4xl font-bold">Hey, I'm <span
       class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
-      >Sergio García</span></h1>
+      >Sergio García</span><span class="ml-4 my-0"><a
+        href="/cv"
+        class="rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-4 py-2 text-base text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-md"
+        >View CV</a
+      ></span></h1>
     <h2 class="text-xl text-pretty">
       I'm a <span class="font-bold">Microsoft Power Platform</span> developer and architect. From Pola de Siero, <span class="font-semibold text-sky-400">Asturias</span> 🇪🇸. I love sharing my knowledge with the community and learning new things. In this blog you can find tutorials and interesting posts about
       development in Power Pages, Power Apps and much more.</h2>
-      <nav class="flex gap-x-4">
+      <nav class="flex flex-wrap gap-4">
         <SocialPill href="https://www.linkedin.com/in/sergio-garc%C3%ADa-fonseca/">  
           <LinkedInIcon class="w-6 h-6"/>
           LinkedIn
@@ -74,11 +78,7 @@ export interface Certification {
         </SocialPill>
       </nav>
   </section>
-  <a
-    href="/cv"
-    class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
-    >View CV</a
-  >
+  
   <section class="mt-12 mb-12">
     <h2 class="text-2xl font-bold mb-2">
       <span
