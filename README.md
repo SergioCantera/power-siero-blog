@@ -1,4 +1,4 @@
-# Power Siero Blog built with Astro and Cosmic
+# Power Siero Website built with Astro and Cosmic
 
 To build this app, we’re going to use the following technologies:
 
