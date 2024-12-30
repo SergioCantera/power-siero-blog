@@ -1,11 +1,10 @@
 import { createBucketClient } from '@cosmicjs/sdk'
 
-const BUCKET_SLUG = import.meta.env.PUBLIC_COSMIC_BUCKET_SLUG
-const READ_KEY = import.meta.env.PUBLIC_COSMIC_READ_KEY
+import {PUBLIC_COSMIC_BUCKET_SLUG, PUBLIC_COSMIC_READ_KEY} from 'astro:env/server'
 
 const cosmic = createBucketClient({
-  bucketSlug: BUCKET_SLUG,
-  readKey: READ_KEY
+  bucketSlug: PUBLIC_COSMIC_BUCKET_SLUG,
+  readKey: PUBLIC_COSMIC_READ_KEY
 })
 
 export async function getAllPosts() {
