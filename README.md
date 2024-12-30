@@ -8,8 +8,7 @@ To build this app, we’re going to use the following technologies:
 
 ### Links
 
-- [Install the template](https://www.cosmicjs.com/marketplace/templates/simple-astro-blog)
-- [View the live demo](https://simple-astro-blog.vercel.app/)
+- [Visit the Power Siero Website](https://power-siero-website.vercel.app/)
 
 ## Screenshots
 
