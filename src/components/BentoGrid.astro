@@ -36,7 +36,7 @@ const featuredClass = postLength < 9
   {
     data.map((post: Post) => (
         post.slug !== featuredPost.slug ?
-        <li class="rounded-md bg-white shadow-md transition hover:shadow-xl md:col-span-2">
+        <li class="rounded-md bg-white shadow-md transition hover:shadow-xl md:col-span-2 dark:bg-zinc-800">
           <a href={`/blog/${post.slug}`}>
           <div class="flex h-full flex-col gap-y-2 p-6">
               <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${post.title}`}>
@@ -79,7 +79,7 @@ const featuredClass = postLength < 9
               )
             }
             <div
-              class="flex h-fit flex-col gap-y-2 rounded-md bg-white p-6 shadow-md">
+              class="flex h-fit flex-col gap-y-2 rounded-b-md bg-white p-6 shadow-md dark:bg-zinc-800">
               <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
               <p class="text-lg">{post.metadata.excerpt}</p>
             

@@ -23,7 +23,7 @@ export interface Props {
 const { href, title,slug, body, metadata, tags } = Astro.props
 ---
 
-<li class="rounded-md bg-white shadow-md transition hover:shadow-xl">
+<li class="rounded-md bg-white dark:bg-zinc-800 shadow-md transition hover:shadow-xl">
   <a href={`/blog/${href}`}>
     <div class="flex h-full w-full flex-col gap-y-2">
       {

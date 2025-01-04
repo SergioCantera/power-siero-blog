@@ -15,7 +15,7 @@ export interface Props {
 const { href, title, body, tags } = Astro.props
 ---
 
-<li class="rounded-md bg-white shadow-md transition hover:shadow-xl">
+<li class="rounded-md bg-white shadow-md transition hover:shadow-xl dark:bg-zinc-800">
   <a href={`/blog/${href}`}>
     <div class="flex h-full flex-col gap-y-2 p-6">
       <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${title}`}>

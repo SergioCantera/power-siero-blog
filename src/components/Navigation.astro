@@ -2,10 +2,11 @@
 import HomeIcon from './icons/HomeIcon.astro'
 import BlogIcon from './icons/BlogIcon.astro'
 import EventIcon from './icons/EventIcon.astro'
+import ThemeIcon from './icons/ThemeIcon.astro'
 ---
 
 <nav
-  class="mx-auto flex h-12 w-fit items-center justify-center gap-x-2 rounded-b-md bg-white px-12 shadow-md">
+  class="mx-auto flex h-12 w-fit items-center justify-center gap-x-2 rounded-b-md bg-white px-12 shadow-md dark:bg-zinc-800 dark:shadow-md">
   <a
     href="/"
     class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
@@ -13,7 +14,6 @@ import EventIcon from './icons/EventIcon.astro'
       <HomeIcon />Home</span
     >
   </a>
-  
   <a
     href="/blog"
     class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
@@ -23,9 +23,10 @@ import EventIcon from './icons/EventIcon.astro'
   </a>
   <a
     href="/events"
-    class="rounded-md px-2 py-1 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
+    class="rounded-md px-2 py-1 mr-4 text-sm uppercase tracking-wider transition hover:bg-zinc-100 hover:text-fuchsia-500 hover:shadow-md"
     ><span class="flex items-center gap-x-1">
       <EventIcon/>Events</span
     >
   </a>
+  <ThemeIcon />
 </nav>

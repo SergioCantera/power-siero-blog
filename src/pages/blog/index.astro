@@ -51,7 +51,7 @@ const tags = featuredPost.metadata.tags
           )
         }
         <div
-          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
+          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white dark:bg-zinc-800 p-6 shadow-md">
           <div>
             <h2 class="text-3xl font-semibold" transition:name={`title-${featuredPost.title}`}>{featuredPost.title}</h2>
             <p class="text-lg">{featuredPost.metadata.excerpt}</p>
@@ -75,7 +75,7 @@ const tags = featuredPost.metadata.tags
         data
         .filter((post: Props) => post.title !== featuredPost.title)
         .map((post: Props) => (
-        <section class="rounded-md bg-white mb-2">
+        <section class="rounded-md bg-white dark:bg-zinc-800 mb-2">
       <a
         href={`blog/${post.slug}`}
         class="transition-opacity hover:opacity-80 flex flex-row">
@@ -94,7 +94,7 @@ const tags = featuredPost.metadata.tags
           )
         }
         <div
-          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white p-6 shadow-md">
+          class="flex h-auto flex-col gap-y-2 rounded-r-md bg-white dark:bg-zinc-800 p-6 shadow-md">
           <div>
             <h2 class="text-3xl font-semibold" transition:name={`title-${post.title}`}>{post.title}</h2>
             <p class="text-lg">{post.metadata.excerpt}</p>
