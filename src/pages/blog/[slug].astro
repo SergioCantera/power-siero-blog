@@ -1,5 +1,5 @@
 ---
-import { getAllPosts, getConfig } from '../../lib/cosmic'
+import { getAllPosts, getConfig, getFeaturedPost } from '../../lib/cosmic'
 import Layout from '../../layouts/Layout.astro'
 import PostBody from '../../components/PostBody'
 import { Image } from 'astro:assets'
@@ -7,7 +7,6 @@ import { parseISO, format } from 'date-fns'
 import Author from '../../components/Author.astro'
 const config = await getConfig()
 const defaultMetaImage = config.metadata.og_image.imgix_url
-import { getFeaturedPost } from '../../lib/cosmic'
 
 interface Props {
   slug: string
@@ -61,7 +60,7 @@ const featuredPost = await getFeaturedPost()
   imageUrl={`${post.metadata.cover_image?.imgix_url}?w=1200&auto=format,compression` ||
     defaultMetaImage}>
   <article>
-    <section class="border-b pb-8">
+    <section class="border-b pb-4">
       <h1 class="text-4xl font-bold" transition:name={`title-${post.title}`}>
         {post.title}
       </h1>
@@ -101,7 +100,7 @@ const featuredPost = await getFeaturedPost()
           height={675}
           quality={50}
           alt={`Cover image for the blog ${post.title}`}
-          class={'my-12 rounded-md shadow-lg'}
+          class={'my-6 rounded-md shadow-lg'}
           transition:name={`cover-image-${featuredPost.slug}`}
           transition:persist
         />
