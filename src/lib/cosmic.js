@@ -18,6 +18,18 @@ export async function getAllPosts() {
   return data.objects
 }
 
+export async function getHomePosts() {
+  const data = await cosmic.objects
+    .find({
+      type: 'posts'
+    })
+    .props('title,slug,metadata,created_at')
+    .sort('-created_at')
+    .depth(2)
+    .limit(9)
+  return data.objects
+}
+
 export async function getFeaturedPost() {
   const data = await cosmic.objects
     .findOne({
@@ -36,6 +48,7 @@ export async function getAllTags(){
   })
   .props('title,slug')
   .depth(1)
+  .limit(9)
   return data.objects
 }
 
@@ -87,7 +100,7 @@ export async function getSessions() {
       type: 'sessions'
     })
     .props('title,slug,metadata')
-    .sort('-metadata.date')
+    .sort('-metadata.startDate')
     .depth(2)
   return data.objects
 }

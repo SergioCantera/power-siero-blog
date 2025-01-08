@@ -24,7 +24,7 @@ const eventTitle = metadata.events[0].title
 ---
 
 <div class=`p-6 max-w-[500px] mx-0 my-auto ${Astro.props.class}`>
-  <h1 class="text-2xl font-bold">{year}</h1>
-  <h2 class="text-xl mt-1 font-semibold">{eventTitle}</h2>
+  <h1 class="text-lg md:text-xl lg:text-2xl font-bold">{year}</h1>
+  <h2 class="sm:text-sm md:text-base lg:text-xl mt-1 font-semibold">{eventTitle}</h2>
   <a href={metadata.url} target="_blank" rel="noopener noreferrer" class="cursor-pointer font-normal text-base mt-2 hover:text-[#4f39fa]">{title}</a>
 </div>

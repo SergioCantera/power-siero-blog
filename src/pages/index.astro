@@ -2,7 +2,7 @@
 import Layout from '@layouts/Layout.astro'
 import Card from '@components/Card.astro'
 import SocialPill from '@components/SocialPill.astro'
-import { getAllPosts, getCertifications, getFeaturedPost } from '../lib/cosmic'
+import { getHomePosts, getCertifications, getFeaturedPost } from '../lib/cosmic'
 import BentoGrid from '@components/BentoGrid.astro'
 import {Image} from 'astro:assets'
 import LinkedInIcon from '@components/icons/LinkedIn.astro'
@@ -10,7 +10,7 @@ import GitHubIcon from '@components/icons/GitHub.astro'
 import SessionizeIcon from '@components/icons/Sessionize.astro'
 import MailIcon from '@components/icons/Mail.astro'
 
-const data = await getAllPosts()
+const data = await getHomePosts()
 const featuredPost = await getFeaturedPost()
 const certifications = await getCertifications()
 const tags = featuredPost.metadata.tags
@@ -49,18 +49,18 @@ export interface Certification {
     alt="Sergio García foto"
     class="rounded-full h-14 w-14 mb-2"
   />
-    <h1 class="text-4xl font-bold">Hey, I'm <span
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold">Hey, I'm <span
       class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
-      >Sergio García</span><span class="ml-4 my-0"><a
+      >Sergio García</span><span class="block md:inline-block ml-0 md:ml-4 my-0"><a
         href="/cv"
         target="_blank"
         rel="noopener noreferrer"
-        class="rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-4 py-2 text-base text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-md"
+        class="rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-4 py-2 text-sm md:text-base text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-md"
         >View CV</a
       ></span></h1>
-    <h2 class="text-xl text-pretty">
+    <h2 class="text-base md:text-xl text-pretty">
       I'm a <span class="font-bold">Microsoft Power Platform</span> developer and architect. From Pola de Siero, <span class="font-semibold text-sky-400">Asturias</span> 🇪🇸. I love sharing my knowledge with the community and learning new things. In this blog you can find tutorials and interesting posts about
-      development in Power Pages, Copilot Studio, Power Apps and much more.</h2>
+      development in Power Platform, Microsoft 365, Azure and much more.</h2>
       <nav class="flex flex-wrap gap-4">
         <SocialPill href="https://www.linkedin.com/in/sergio-garc%C3%ADa-fonseca/">  
           <LinkedInIcon class="w-6 h-6"/>
@@ -82,13 +82,13 @@ export interface Certification {
   </section>
   
   <section class="mt-12 mb-12">
-    <h2 class="text-2xl font-bold mb-2">
+    <h2 class="text-xl md:text-2xl font-bold mb-2">
       <span
         class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
         >Certifications & badges</span
       >
     </h2>
-    <div class="grid grid-cols-2 max-w-4xl gap-2">
+    <div class="grid grid-cols-1 max-w-4xl gap-2 md:grid-cols-2">
     {
       certifications.map((certification:Certification) => (
         <div class="flex flex-row items-center space-x-2 border-2 border-sky-400 px-4 py-2 rounded-full">
@@ -100,21 +100,22 @@ export interface Certification {
               alt={`badge-${certification.slug}`}
               loading="eager"
             />
-          <span class="text-base text-wrap font-semibold">{certification.title}</span>
+          <span class="text-sm md:text-base text-wrap font-semibold">{certification.title}</span>
         </div>
       ))
     }
     </div>
   </section>
   <section class="mt-12 mb-6">
-    <h1 class="text-4xl font-bold mb-6">
+    <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-6">
       <span
         class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
         >Power Siero</span
       > Blog
     </h1>
-    {data.length < 6 ? 
-    <ul class="grid gap-2 md:grid-cols-6">
+    {
+    data.length < 6 ? 
+    <ul class="grid gap-2 md:grid-cols-2">
       {
         data.map((post: Post) => (
           <Card
@@ -131,7 +132,7 @@ export interface Certification {
   </section>
   <a
     href="/blog"
-    class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
+    class="self-center rounded-md bg-gradient-to-l from-[#29ABE2] to-[#6CEEF6] px-8 py-3 text-base md:text-xl text-white shadow-md transition hover:bg-gradient-to-b hover:from-[#4f39fa] hover:to-[#da62c4] hover:shadow-xl"
     >More articles</a
   >
 </Layout>
