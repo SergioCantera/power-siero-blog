@@ -60,19 +60,24 @@ const tags:Props[] = await getAllTags()
   </nav>
   <div class="my-6"></div>
   <div class="flex flex-col gap-3">
-    <ul class="grid gap-3 md:grid-cols-2">
       {
-        data.map((post:Post) => (
-          <CardWithImage
-            title={post.title}
-            slug={post.slug}
-            href={post.slug}
-            body={post.metadata.excerpt}
-            tags={post.metadata.tags.map((tag) => tag)}
-            metadata={post.metadata}
-          />
-        ))
+        data.length === 0 ? 
+        <div class="flex items-center justify-center h-40">
+          <h1 class="text-3xl font-semibold">No posts found for this tag</h1>
+        </div> :
+        <ul class="grid gap-3 md:grid-cols-2">
+          {data.map((post:Post) => (
+            <CardWithImage
+              title={post.title}
+              slug={post.slug}
+              href={post.slug}
+              body={post.metadata.excerpt}
+              tags={post.metadata.tags.map((tag) => tag)}
+              metadata={post.metadata}
+            />
+          ))
+          }
+      </ul>
     }
-    </ul>
   </div>
 </Layout>

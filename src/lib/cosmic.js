@@ -68,12 +68,19 @@ export async function getPostsByTag(tag) {
     type: 'posts',
     'metadata.tags': tag
   }
-  const data = await cosmic.objects
-    .find(query)
-    .props('title,slug,metadata,created_at')
-    .sort('-created_at')
-    .depth(2)
-  return data.objects
+  try {
+    const data = await cosmic.objects
+      .find(query)
+      .props('title,slug,metadata,created_at')
+      .sort('-created_at')
+      .depth(2)
+    
+    return data.objects
+  } catch (error) {
+    if (error.status === 404) {
+      return []
+    }
+  }
 }
 
 export async function getConfig() {
