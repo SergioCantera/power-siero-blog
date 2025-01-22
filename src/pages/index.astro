@@ -9,11 +9,17 @@ import LinkedInIcon from '@components/icons/LinkedIn.astro'
 import GitHubIcon from '@components/icons/GitHub.astro'
 import SessionizeIcon from '@components/icons/Sessionize.astro'
 import MailIcon from '@components/icons/Mail.astro'
+import ProjectCard from '@components/ProjectCard.astro'
+import {type Project} from '@components/ProjectCard.astro'
+import {getCV} from "@lib/cosmic"
+
 
 const data = await getHomePosts()
 const featuredPost = await getFeaturedPost()
 const certifications = await getCertifications()
 const tags = featuredPost.metadata.tags
+const {projects} = await getCV()
+
 
 export interface Post {
   title: string
@@ -88,7 +94,7 @@ export interface Certification {
         >Certifications & badges</span
       >
     </h2>
-    <div class="grid grid-cols-1 max-w-4xl gap-2 md:grid-cols-2">
+    <div class="grid grid-cols-1 max-w-5xl gap-2 md:grid-cols-2">
     {
       certifications.map((certification:Certification) => (
         <div class="flex flex-row items-center space-x-2 border-2 border-sky-400 px-4 py-2 rounded-full">
@@ -106,8 +112,30 @@ export interface Certification {
     }
     </div>
   </section>
+  <section class="mt-12 mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-2">
+      <span
+        class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
+        >Projects</span
+      >
+    </h2>
+    <div class="grid max-w-5xl gap-2 md:grid-cols-2">
+    {
+      projects.map((project:Project) => (
+        <ProjectCard
+          name={project.name}
+          isActive={project.isActive}
+          description={project.description}
+          url={project.url}
+          github={project.github}
+          highlights={project.highlights}
+        />
+      ))
+    }
+    </div>
+  </section>
   <section class="mt-12 mb-6">
-    <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-6">
+    <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-6 ">
       <span
         class="bg-gradient-to-b from-[#4f39fa] to-[#da62c4] bg-clip-text text-transparent"
         >Power Siero</span
@@ -115,7 +143,7 @@ export interface Certification {
     </h1>
     {
     data.length < 6 ? 
-    <ul class="grid gap-2 md:grid-cols-2">
+    <div class="grid max-w-5xl gap-2 md:grid-cols-2">
       {
         data.map((post: Post) => (
           <Card
@@ -126,7 +154,7 @@ export interface Certification {
           />
         ))
       }
-    </ul> : 
+    </div> : 
       <BentoGrid data={data} featuredPost={featuredPost}/>
     }
   </section>

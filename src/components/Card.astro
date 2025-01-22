@@ -15,26 +15,30 @@ export interface Props {
 const { href, title, body, tags } = Astro.props
 ---
 
-<li class="rounded-md bg-white shadow-md transition hover:shadow-xl dark:bg-zinc-800">
-  <a href={`/blog/${href}`}>
-    <div class="flex h-full flex-col gap-y-2 p-6">
-      <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${title}`}>
-        {title}
-      </h2>
-      <p>
-        {body}
-      </p>
-      {
-        tags && (
-          <div class="flex flex-wrap gap-1">
-            {tags?.map(
-              (tag: { title: string; metadata: { color?: string } }) => (
-                <TagBadge {...tag} key={tag.title} />
-              )
-            )}
-          </div>
-        )
-      }
-    </div>
-  </a>
-</li>
+<div role="contentinfo" class="grid-span-1 relative flex flex-col rounded-md bg-white shadow-md transition hover:shadow-xl dark:bg-zinc-800">
+    <a href={`/blog/${href}`}>
+      <div class="flex h-full flex-col gap-y-2 p-6 justify-between min-h-[200px]">
+        <div>
+          <h2 class="pr-4 pt-2 text-xl font-semibold" transition:name={`title-${title}`}>
+            {title}
+          </h2>
+          <p>
+            {body}
+          </p>
+      </div>
+      <div>
+          {
+            tags && (
+              <div class="flex flex-wrap gap-1">
+                {tags?.map(
+                  (tag: { title: string; metadata: { color?: string } }) => (
+                    <TagBadge {...tag} key={tag.title} />
+                  )
+                )}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </a>
+  </div>
