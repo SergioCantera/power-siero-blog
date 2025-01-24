@@ -8,7 +8,7 @@ To build this app, we’re going to use the following technologies:
 
 ### Links
 
-- [Visit the Power Siero Website](https://power-siero-website.vercel.app/)
+- [Visit the Power Siero Website](https://powersiero.com/)
 
 ## Screenshots
 
