@@ -87,7 +87,7 @@ const featuredPost = await getFeaturedPost()
               ''
             )
           }
-          <span>{format(parseISO(post.created_at), 'MM/dd/yyyy')}</span>
+          <span>{format(parseISO(post.created_at), 'dd/MM/yyyy')}</span>
         </span>
       </span>
     </section>
