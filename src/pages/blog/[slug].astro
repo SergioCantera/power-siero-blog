@@ -1,10 +1,10 @@
 ---
-import { getAllPosts, getConfig, getFeaturedPost } from '../../lib/cosmic'
-import Layout from '../../layouts/Layout.astro'
-import PostBody from '../../components/PostBody'
+import { getAllPosts, getConfig, getFeaturedPost } from '@lib/cosmic'
+import Layout from '@layouts/Layout.astro'
+import PostBody from '@components/PostBody'
 import { Image } from 'astro:assets'
 import { parseISO, format } from 'date-fns'
-import Author from '../../components/Author.astro'
+import Author from '@components/Author.astro'
 const config = await getConfig()
 const defaultMetaImage = config.metadata.og_image.imgix_url
 

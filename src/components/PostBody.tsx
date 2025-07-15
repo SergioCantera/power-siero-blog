@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 
 const components: {} = {
   p: (p: { children: string }) => {
-    return <p className="text-xl">{p.children}</p>
+    return <p className="text-xl pt-1 pb-6">{p.children}</p>
   },
   a: (a: { children: string; href: string }) => {
     return (
@@ -19,7 +19,7 @@ const components: {} = {
     return <ul className='list-disc list-inside'>{ ul.children }</ul>
   },
   li: (li: {children:string}) => {
-    return <li className='block ml-4 text-xl'>{ li.children }</li>
+    return <li className='list-item ml-8 mb-2 text-xl'>{ li.children }</li>
   },
   /*code: (code: { children:string }) => {
     return <code className="inline-block text-lg px-1 py-2 text-[#232629] bg-[#e3e6e8] rounded-sm italic">{code.children}</code>
@@ -49,12 +49,12 @@ const components: {} = {
     return (
     <div
       data-code-block
-      className="inline-flex bg-gradient-to-r from-[#405DFF]/70 to-[#405DFF]/30 appearance-none rounded-lg p-px"
+      className="inline-flex bg-gradient-to-r from-[#111111]/80 to-[#111111]/70 dark:from-[#405DFF]/70 dark:to-[#405DFF]/30 appearance-none rounded-lg p-px"
     >
       <div
-        className="inline-flex items-center gap-2 bg-neutral-100/90 text-neutral-500 rounded-lg p-3 w-full"
+        className="inline-flex items-center gap-2 dark:bg-neutral-100/90 dark:text-neutral-500 rounded-lg p-8 w-full"
       >
-        <code data-code className="text-md font-mono text-neutral-700">
+        <code data-code className="text-md text-wrap font-mono text-neutral-100 dark:text-neutral-700">
           {code.children}
         </code>
         {/*
@@ -97,19 +97,19 @@ const components: {} = {
     
   )},
   h2: (h2: { children: string }) => {
-    return <h2 className="text-4xl">{h2.children}</h2>
+    return <h2 className="text-4xl pt-8">{h2.children}</h2>
   },
   h3: (h3: { children: string }) => {
-    return <h3 className="text-3xl font-semibold">{h3.children}</h3>
+    return <h3 className="text-3xl font-semibold pt-6">{h3.children}</h3>
   },
   h4: (h4: { children: string }) => {
-    return <h4 className="text-2xl font-semibold">{h4.children}</h4>
+    return <h4 className="text-2xl font-semibold pt-4">{h4.children}</h4>
   },
   h5: (h5: { children: string }) => {
-    return <h5 className="text-xl font-medium">{h5.children}</h5>
+    return <h5 className="text-xl font-medium pt-2">{h5.children}</h5>
   },
   h6: (h6: { children: string }) => {
-    return <h6 className="text-lg font-normal">{h6.children}</h6>
+    return <h6 className="text-lg font-normal pt-1">{h6.children}</h6>
   },
   img: (img: { src: string; alt: string }) => {
     return (
