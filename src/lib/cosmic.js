@@ -48,7 +48,7 @@ export async function getAllTags(){
   })
   .props('title,slug')
   .depth(1)
-  .limit(9)
+  .sort('title')
   return data.objects
 }
 
