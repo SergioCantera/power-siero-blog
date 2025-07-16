@@ -18,6 +18,9 @@ const components: {} = {
   ul: (ul: {children:string}) => {
     return <ul className='list-disc list-inside'>{ ul.children }</ul>
   },
+  ol: (ol: {children:string}) => {
+    return <ol className='list-decimal list-inside'>{ ol.children }</ol>
+  },
   li: (li: {children:string}) => {
     return <li className='list-item ml-8 mb-2 text-xl'>{ li.children }</li>
   },
