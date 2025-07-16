@@ -107,7 +107,6 @@ export async function getSessions() {
       type: 'sessions'
     })
     .props('title,slug,metadata')
-    .sort('-metadata.startDate')
     .depth(2)
   return data.objects
 }

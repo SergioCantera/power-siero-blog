@@ -4,6 +4,11 @@ import SessionItem from '@components/SessionItem.astro'
 import { getSessions } from '@lib/cosmic'
 
 const sessions = await getSessions()
+const sortSessions =sessions.sort((a:Session, b:Session) => {
+  const dateA = new Date(a.metadata.events[0].metadata.start_date)
+  const dateB = new Date(b.metadata.events[0].metadata.start_date)
+  return dateB.getTime() - dateA.getTime()
+} )
 
 export interface Session {
   title: string
@@ -26,7 +31,7 @@ export interface Session {
       <div>
         <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Sessions & talks</h2>
         <div class="mysessions-grid">
-          {sessions.map((session:Session, index:number) => {
+          {sortSessions.map((session:Session, index:number) => {
             if (index % 2 === 0) {
               return(
                 <>
