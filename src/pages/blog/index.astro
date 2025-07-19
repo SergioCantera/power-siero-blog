@@ -35,7 +35,7 @@ const tags = featuredPost.metadata.tags
     <section class="flex flex-col lg:flex-row rounded-md bg-white mb-2">
       <a
         href={`/blog/${featuredPost.slug}`}
-        class="transition-opacity hover:opacity-80 flex flex-row lg:min-h-[200px]">
+        class="transition-opacity hover:opacity-80 flex flex-row lg:max-h-[500px]">
         {
           featuredPost.metadata.cover_image && (
             <Image

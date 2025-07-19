@@ -52,7 +52,7 @@ const components: {} = {
     return (
     <div
       data-code-block
-      className="inline-flex bg-gradient-to-r from-[#111111]/80 to-[#111111]/70 dark:from-[#405DFF]/70 dark:to-[#405DFF]/30 appearance-none rounded-lg p-px"
+      className="my-4 mx-8 inline-flex bg-gradient-to-r from-[#111111]/80 to-[#111111]/70 dark:from-[#405DFF]/70 dark:to-[#405DFF]/30 appearance-none rounded-lg p-px"
     >
       <div
         className="inline-flex items-center gap-2 dark:bg-neutral-100/90 dark:text-neutral-500 rounded-lg p-8 w-full"
@@ -121,7 +121,7 @@ const components: {} = {
         alt={img.alt}
         loading="lazy"
         decoding="async"
-        className="rounded-md shadow"
+        className="rounded-md shadow my-4"
       />
     )
   }
