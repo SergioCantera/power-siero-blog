@@ -12,7 +12,7 @@ const { title, description, imageUrl } = Astro.props
     <Metadata title={title} description={description} imageUrl={imageUrl} />
     <ClientRouter />
   </head>
-  <body class="bg-zinc-100 dark:bg-zinc-700 dark:text-white">
+  <body class="bg-zinc-100 dark:bg-zinc-700 dark:text-white min-w-[600px]">
     <Navigation />
     <main
       class="mx-auto my-12 flex min-h-screen max-w-5xl flex-col px-6 xl:px-0">
